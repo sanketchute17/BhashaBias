@@ -2,7 +2,7 @@
 
 > **College TAE-I Assignment: "Bias Bounty Hunt"**  
 > **Course / Project Title**: *Hinglish Bias Audit of an AI Assistant: Comparing AI Behaviour Across English, Hindi, and Hinglish*  
-> **Repository**: [https://github.com/SanketChute/BhashaBias](https://github.com/SanketChute/BhashaBias)  
+> **Repository**: [https://github.com/sanketchute17-ctrl/BhashaBias](https://github.com/sanketchute17-ctrl/BhashaBias)  
 > **Target Endpoint**: Google Gemini 1.5 Flash API / Responsible AI Evaluation Suite
 
 ---
