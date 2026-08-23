@@ -1,0 +1,23 @@
+{
+  "name": "tae-i-hinglish-bias-audit-server",
+  "version": "1.0.0",
+  "description": "Backend API for Hinglish Bias Audit of an AI Assistant",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "seed": "node seed.js"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "cors": "^2.8.5",
+    "csv-parse": "^5.5.5",
+    "csv-parser": "^3.0.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "json2csv": "^5.0.6",
+    "multer": "^1.4.5-lts.1",
+    "sqlite3": "^5.1.7"
+  }
+}
