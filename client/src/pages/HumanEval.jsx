@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Save, ChevronLeft, ChevronRight } from 'lucide-react';
+import { MOCK_RESPONSES } from '../data/mockData';
 
 export default function HumanEval({ darkMode }) {
   const [responses, setResponses] = useState([]);
@@ -25,13 +26,20 @@ export default function HumanEval({ darkMode }) {
   const fetchResponses = async () => {
     try {
       const res = await fetch('/api/responses');
-      const data = await res.json();
-      if (data.success && data.responses.length > 0) {
-        setResponses(data.responses);
-        loadCurrentEval(data.responses[0]);
+      const ct = res.headers.get('content-type') || '';
+      if (res.ok && ct.includes('application/json')) {
+        const data = await res.json();
+        if (data.success && data.responses?.length > 0) {
+          setResponses(data.responses);
+          loadCurrentEval(data.responses[0]);
+          return;
+        }
       }
+      setResponses(MOCK_RESPONSES);
+      loadCurrentEval(MOCK_RESPONSES[0]);
     } catch (e) {
-      console.error(e);
+      setResponses(MOCK_RESPONSES);
+      loadCurrentEval(MOCK_RESPONSES[0]);
     } finally {
       setLoading(false);
     }

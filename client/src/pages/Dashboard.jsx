@@ -41,7 +41,7 @@ export default function Dashboard({ setActiveTab, darkMode }) {
       }
     } catch (e) {
       console.error('Failed to fetch dashboard metrics:', e);
-    } font-bold;
+    }
   };
 
   const fetchRuns = async () => {

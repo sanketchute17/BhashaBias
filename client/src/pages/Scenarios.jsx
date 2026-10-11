@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Search, Plus, Upload, Download, Trash2, Edit3, Filter } from 'lucide-react';
+import { MOCK_SCENARIOS } from '../data/mockData';
 
 export default function Scenarios({ darkMode }) {
   const [scenarios, setScenarios] = useState([]);
@@ -26,12 +27,34 @@ export default function Scenarios({ darkMode }) {
       let url = `/api/scenarios?category=${categoryFilter}`;
       if (search) url += `&search=${encodeURIComponent(search)}`;
       const res = await fetch(url);
-      const data = await res.json();
-      if (data.success) {
-        setScenarios(data.scenarios);
+      const ct = res.headers.get('content-type') || '';
+      if (res.ok && ct.includes('application/json')) {
+        const data = await res.json();
+        if (data.success && data.scenarios?.length > 0) {
+          setScenarios(data.scenarios);
+          return;
+        }
       }
+      // Fallback to pre-seeded mock scenarios
+      let list = [...MOCK_SCENARIOS];
+      if (categoryFilter !== 'All') {
+        list = list.filter(s => s.category.toLowerCase() === categoryFilter.toLowerCase());
+      }
+      if (search) {
+        const q = search.toLowerCase();
+        list = list.filter(s =>
+          s.scenario_id.toLowerCase().includes(q) ||
+          s.english_prompt.toLowerCase().includes(q) ||
+          s.hinglish_prompt?.toLowerCase().includes(q)
+        );
+      }
+      setScenarios(list);
     } catch (e) {
-      console.error(e);
+      let list = [...MOCK_SCENARIOS];
+      if (categoryFilter !== 'All') {
+        list = list.filter(s => s.category.toLowerCase() === categoryFilter.toLowerCase());
+      }
+      setScenarios(list);
     } finally {
       setLoading(false);
     }

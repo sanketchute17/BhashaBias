@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { GitCompare } from 'lucide-react';
+import { MOCK_SCENARIOS, MOCK_RESPONSES } from '../data/mockData';
 
 export default function CaseEvidence({ darkMode }) {
   const [responses, setResponses] = useState([]);
@@ -25,10 +26,17 @@ export default function CaseEvidence({ darkMode }) {
   const fetchScenariosList = async () => {
     try {
       const res = await fetch('/api/scenarios');
-      const data = await res.json();
-      if (data.success) setScenarios(data.scenarios);
+      const ct = res.headers.get('content-type') || '';
+      if (res.ok && ct.includes('application/json')) {
+        const data = await res.json();
+        if (data.success && data.scenarios?.length > 0) {
+          setScenarios(data.scenarios);
+          return;
+        }
+      }
+      setScenarios(MOCK_SCENARIOS);
     } catch (e) {
-      console.error(e);
+      setScenarios(MOCK_SCENARIOS);
     }
   };
 
@@ -36,16 +44,25 @@ export default function CaseEvidence({ darkMode }) {
     try {
       let url = `/api/responses?flagged_only=true&language=${langFilter}`;
       const res = await fetch(url);
-      const data = await res.json();
-      if (data.success) {
-        let list = data.responses;
-        if (categoryFilter !== 'All') {
-          list = list.filter(r => r.category === categoryFilter);
+      const ct = res.headers.get('content-type') || '';
+      if (res.ok && ct.includes('application/json')) {
+        const data = await res.json();
+        if (data.success && data.responses?.length > 0) {
+          let list = data.responses;
+          if (categoryFilter !== 'All') {
+            list = list.filter(r => r.category === categoryFilter);
+          }
+          setResponses(list);
+          return;
         }
-        setResponses(list);
       }
+      let list = MOCK_RESPONSES.filter(r => r.bias_score >= 1 || r.stereotype_present === 1);
+      if (langFilter !== 'All') list = list.filter(r => r.language === langFilter);
+      if (categoryFilter !== 'All') list = list.filter(r => r.category === categoryFilter);
+      setResponses(list);
     } catch (e) {
-      console.error(e);
+      let list = MOCK_RESPONSES.filter(r => r.bias_score >= 1 || r.stereotype_present === 1);
+      setResponses(list);
     } finally {
       setLoading(false);
     }
@@ -54,10 +71,21 @@ export default function CaseEvidence({ darkMode }) {
   const fetchComparison = async (scId) => {
     try {
       const res = await fetch(`/api/responses/compare/${scId}`);
-      const data = await res.json();
-      if (data.success) setComparisonData(data);
+      const ct = res.headers.get('content-type') || '';
+      if (res.ok && ct.includes('application/json')) {
+        const data = await res.json();
+        if (data.success && data.responses?.length > 0) {
+          setComparisonData(data);
+          return;
+        }
+      }
+      const sc = MOCK_SCENARIOS.find(s => s.scenario_id === scId) || MOCK_SCENARIOS[0];
+      const resps = MOCK_RESPONSES.filter(r => r.scenario_id === scId);
+      setComparisonData({ success: true, scenario: sc, responses: resps });
     } catch (e) {
-      console.error(e);
+      const sc = MOCK_SCENARIOS.find(s => s.scenario_id === scId) || MOCK_SCENARIOS[0];
+      const resps = MOCK_RESPONSES.filter(r => r.scenario_id === scId);
+      setComparisonData({ success: true, scenario: sc, responses: resps });
     }
   };
 

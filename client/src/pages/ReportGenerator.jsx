@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Copy, Printer, Check, AlertTriangle } from 'lucide-react';
+import { MOCK_REPORT_MD } from '../data/mockData';
 
 export default function ReportGenerator({ darkMode }) {
   const [report, setReport] = useState(null);
@@ -13,10 +14,17 @@ export default function ReportGenerator({ darkMode }) {
   const fetchReport = async () => {
     try {
       const res = await fetch('/api/report/generate');
-      const data = await res.json();
-      if (data.success) setReport(data);
+      const ct = res.headers.get('content-type') || '';
+      if (res.ok && ct.includes('application/json')) {
+        const data = await res.json();
+        if (data.success && data.markdown) {
+          setReport(data);
+          return;
+        }
+      }
+      setReport({ success: true, isDemo: true, markdown: MOCK_REPORT_MD });
     } catch (e) {
-      console.error(e);
+      setReport({ success: true, isDemo: true, markdown: MOCK_REPORT_MD });
     } finally {
       setLoading(false);
     }

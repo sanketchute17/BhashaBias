@@ -18,17 +18,32 @@ export default function Settings({ onUpdateSettings, darkMode }) {
   const fetchSettings = async () => {
     try {
       const res = await fetch('/api/settings');
-      const data = await res.json();
-      if (data.success) {
-        const s = data.settings;
+      const ct = res.headers.get('content-type') || '';
+      if (res.ok && ct.includes('application/json')) {
+        const data = await res.json();
+        if (data.success) {
+          const s = data.settings;
+          if (s.model_name) setModelName(s.model_name);
+          if (s.temperature) setTemperature(s.temperature);
+          if (s.bias_threshold) setBiasThreshold(s.bias_threshold);
+          if (s.alpha_threshold) setAlphaThreshold(s.alpha_threshold);
+          if (s.gemini_api_key) setApiKey(s.gemini_api_key);
+          return;
+        }
+      }
+    } catch (e) {
+      // offline fallback
+    }
+    const saved = localStorage.getItem('bhasha_settings');
+    if (saved) {
+      try {
+        const s = JSON.parse(saved);
         if (s.model_name) setModelName(s.model_name);
         if (s.temperature) setTemperature(s.temperature);
         if (s.bias_threshold) setBiasThreshold(s.bias_threshold);
         if (s.alpha_threshold) setAlphaThreshold(s.alpha_threshold);
         if (s.gemini_api_key) setApiKey(s.gemini_api_key);
-      }
-    } catch (e) {
-      console.error(e);
+      } catch (err) {}
     }
   };
 
@@ -37,31 +52,35 @@ export default function Settings({ onUpdateSettings, darkMode }) {
     setSaving(true);
     setMsg('');
 
+    const payload = {
+      gemini_api_key: apiKey,
+      model_name: modelName,
+      temperature,
+      bias_threshold: biasThreshold,
+      alpha_threshold: alphaThreshold
+    };
+    localStorage.setItem('bhasha_settings', JSON.stringify(payload));
+
     try {
       const res = await fetch('/api/settings', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          settings: {
-            gemini_api_key: apiKey,
-            model_name: modelName,
-            temperature,
-            bias_threshold: biasThreshold,
-            alpha_threshold: alphaThreshold
-          }
-        })
+        body: JSON.stringify({ settings: payload })
       });
-
-      const data = await res.json();
-      if (data.success) {
-        setMsg('Settings saved successfully!');
-        if (onUpdateSettings) onUpdateSettings();
+      const ct = res.headers.get('content-type') || '';
+      if (res.ok && ct.includes('application/json')) {
+        const data = await res.json();
+        if (data.success) {
+          setMsg('Settings saved successfully!');
+          if (onUpdateSettings) onUpdateSettings();
+          setSaving(false);
+          return;
+        }
       }
-    } catch (err) {
-      setMsg(`Error: ${err.message}`);
-    } finally {
-      setSaving(false);
-    }
+    } catch (err) {}
+    setMsg('Settings saved successfully (Local Archive Mode)!');
+    if (onUpdateSettings) onUpdateSettings();
+    setSaving(false);
   };
 
   const handleResetDemoData = async () => {

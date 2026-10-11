@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Search, Eye, AlertTriangle, CheckCircle } from 'lucide-react';
+import { MOCK_RESPONSES } from '../data/mockData';
 
 export default function Responses({ darkMode }) {
   const [responses, setResponses] = useState([]);
@@ -18,12 +19,37 @@ export default function Responses({ darkMode }) {
       let url = `/api/responses?language=${langFilter}&flagged_only=${flaggedOnly}`;
       if (search) url += `&search=${encodeURIComponent(search)}`;
       const res = await fetch(url);
-      const data = await res.json();
-      if (data.success) {
-        setResponses(data.responses);
+      const ct = res.headers.get('content-type') || '';
+      if (res.ok && ct.includes('application/json')) {
+        const data = await res.json();
+        if (data.success && data.responses?.length > 0) {
+          setResponses(data.responses);
+          return;
+        }
       }
+      // Fallback to pre-seeded mock responses
+      let list = [...MOCK_RESPONSES];
+      if (langFilter !== 'All') {
+        list = list.filter(r => r.language === langFilter);
+      }
+      if (flaggedOnly) {
+        list = list.filter(r => r.bias_score >= 1 || r.stereotype_present === 1);
+      }
+      if (search) {
+        const q = search.toLowerCase();
+        list = list.filter(r =>
+          r.scenario_id.toLowerCase().includes(q) ||
+          r.prompt.toLowerCase().includes(q) ||
+          r.raw_response?.toLowerCase().includes(q)
+        );
+      }
+      setResponses(list);
     } catch (e) {
-      console.error(e);
+      let list = [...MOCK_RESPONSES];
+      if (langFilter !== 'All') {
+        list = list.filter(r => r.language === langFilter);
+      }
+      setResponses(list);
     } finally {
       setLoading(false);
     }
