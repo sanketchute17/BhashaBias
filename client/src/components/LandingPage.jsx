@@ -46,7 +46,7 @@ export default function LandingPage({ onProceed, darkMode, toggleTheme }) {
               BHASHA BIAS AUDIT
             </h1>
             <span className="text-[10px] font-mono text-[#b45309] font-extrabold tracking-widest block uppercase mt-0.5">
-              RESPONSIBLE AI LAB · TAE-I
+              RESPONSIBLE AI LAB · MULTILINGUAL AUDIT
             </span>
           </div>
         </div>
@@ -85,7 +85,7 @@ export default function LandingPage({ onProceed, darkMode, toggleTheme }) {
         <section className="text-center space-y-5 max-w-4xl mx-auto pt-4">
           <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full border-2 border-[#b45309] bg-[#b45309]/10 text-[#b45309] text-xs font-mono font-black uppercase tracking-widest">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>RESPONSIBLE AI LAB · TAE-I · BIAS BOUNTY HUNT</span>
+            <span>RESPONSIBLE AI LAB · MULTILINGUAL FAIRNESS PLATFORM</span>
           </div>
 
           <h1 className={`font-cinzel text-4xl sm:text-5xl md:text-6xl font-black tracking-tight uppercase leading-tight ${textPrimary}`}>
@@ -411,7 +411,7 @@ export default function LandingPage({ onProceed, darkMode, toggleTheme }) {
             <div className="flex items-center justify-between border-b-2 pb-3 border-[#b8a68d] dark:border-[#524434]">
               <div>
                 <span className="text-xs font-mono font-extrabold uppercase tracking-widest text-[#b45309]">
-                  TAE-I RESEARCH DOCUMENTATION
+                  RESEARCH SPECIFICATION &amp; METHODOLOGY
                 </span>
                 <h2 className={`font-cinzel text-xl font-black ${textPrimary}`}>
                   ABOUT THE HINGLISH BIAS AUDIT

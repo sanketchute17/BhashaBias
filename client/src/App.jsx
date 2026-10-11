@@ -25,7 +25,6 @@ import {
   Home
 } from 'lucide-react';
 
-import IntroSequence from './components/IntroSequence';
 import LandingPage from './components/LandingPage';
 import Dashboard from './pages/Dashboard';
 import AuditEngine from './pages/AuditEngine';
@@ -54,12 +53,8 @@ export default function App() {
 
   // Day / Night Mode state (defaults to Day mode)
   const [darkMode, setDarkMode] = useState(() => {
-    const saved = localStorage.getItem('tae_theme');
+    const saved = localStorage.getItem('bhasha_theme');
     return saved ? saved === 'night' : false;
-  });
-
-  const [showIntro, setShowIntro] = useState(() => {
-    return !sessionStorage.getItem('tae_intro_seen');
   });
 
   useEffect(() => {
@@ -79,14 +74,9 @@ export default function App() {
     }
   };
 
-  const handleFinishIntro = () => {
-    sessionStorage.setItem('tae_intro_seen', 'true');
-    setShowIntro(false);
-  };
-
   const toggleTheme = (isDark) => {
     setDarkMode(isDark);
-    localStorage.setItem('tae_theme', isDark ? 'night' : 'day');
+    localStorage.setItem('bhasha_theme', isDark ? 'night' : 'day');
   };
 
   const navGroups = [
@@ -128,7 +118,7 @@ export default function App() {
       group: 'SYSTEM',
       items: [
         { id: 'settings', label: 'Settings', icon: SettingsIcon },
-        { id: 'checklist', label: 'TAE-I Checklist', icon: CheckSquare },
+        { id: 'checklist', label: 'Benchmark Checklist', icon: CheckSquare },
       ]
     }
   ];
@@ -137,9 +127,6 @@ export default function App() {
 
   return (
     <div className={`min-h-screen ${themeClass}`}>
-      {/* Intro Sequence Animation */}
-      {showIntro && <IntroSequence onComplete={handleFinishIntro} />}
-
       {/* Render Landing Page View or Dashboard View */}
       {viewMode === 'landing' ? (
         <LandingPage
@@ -230,7 +217,7 @@ export default function App() {
                   </button>
                   <span className="text-[#b8a68d]">|</span>
                   <span className="font-cinzel text-xs font-extrabold tracking-[0.15em] text-[#990000] uppercase">
-                    TAE-I ACADEMIC AUDIT
+                    RESPONSIBLE AI AUDIT SUITE
                   </span>
                 </div>
 

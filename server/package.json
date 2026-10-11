@@ -1,7 +1,7 @@
 {
-  "name": "tae-i-hinglish-bias-audit-server",
+  "name": "bhashabias-audit-server",
   "version": "1.0.0",
-  "description": "Backend API for Hinglish Bias Audit of an AI Assistant",
+  "description": "Backend API for BhashaBias: Multilingual & Hinglish AI Bias Audit Platform",
   "main": "index.js",
   "type": "module",
   "scripts": {

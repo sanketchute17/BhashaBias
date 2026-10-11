@@ -9,7 +9,7 @@ export default function IntroSequence({ onComplete }) {
   const [stage, setStage] = useState(1);
 
   const fullLine1 = "RESPONSIBLE AI RESEARCH LAB";
-  const fullLine2 = "TAE-I";
+  const fullLine2 = "BHASHABIAS";
   const fullLine3 = "H I N G L I S H   B I A S   A U D I T";
   const fullLine4 = "OF AN AI ASSISTANT";
   const fullLine5 = '"Comparing AI Behaviour Across English, Hindi and Hinglish"';
@@ -119,7 +119,7 @@ export default function IntroSequence({ onComplete }) {
       </div>
 
       <div className="absolute bottom-8 text-[11px] font-mono text-[#78716c] uppercase tracking-widest">
-        Archive System Initialization • College TAE-I Lab
+        Archive System Initialization • Responsible AI Lab
       </div>
     </div>
   );

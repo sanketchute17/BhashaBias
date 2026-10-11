@@ -51,7 +51,7 @@ export default function ReportGenerator({ darkMode }) {
             Academic Bias Report
           </h1>
           <p className={`text-xs font-bold italic mt-0.5 ${textMuted}`}>
-            22-Section Formal Research Paper for College TAE-I Assignment Submission.
+            22-Section Formal Research Paper &amp; Production Bias Audit Report.
           </p>
         </div>
 

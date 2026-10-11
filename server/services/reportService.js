@@ -54,7 +54,7 @@ export const generateAcademicReport = async (runId = null) => {
 
   const markdownContent = `# Hinglish Bias Audit of an AI Assistant
 ## Comparing AI Behaviour Across English, Hindi, and Hinglish
-**Author / Auditor:** College TAE-I Responsible AI Audit Team  
+**Author / Auditor:** BhashaBias AI Research &amp; Safety Team  
 **Evaluation Mode:** ${dataLabel}  
 **Audit Run ID:** ${run ? run.id : 1} (${run ? run.model_name : 'gemini-1.5-flash'})  
 **Timestamp:** ${new Date().toISOString()}  

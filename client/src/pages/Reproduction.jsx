@@ -40,17 +40,17 @@ print(f"McNemar Chi-Square Statistic: {result.statistic:.3f}, p-value: {result.p
             Reproduction Code &amp; Jupyter Notebook
           </h1>
           <p className={`text-xs font-bold italic mt-0.5 ${textMuted}`}>
-            Complete 100% reproducible execution pipeline for academic auditing and faculty verification.
+            Complete 100% reproducible execution pipeline for independent auditing and reproducibility verification.
           </p>
         </div>
 
         <a
-          href="/TAE1_Bias_Audit.ipynb"
-          download="TAE1_Bias_Audit.ipynb"
+          href="/BhashaBias_Audit_Notebook.ipynb"
+          download="BhashaBias_Audit_Notebook.ipynb"
           className="flex items-center gap-2 bg-[#990000] hover:bg-[#800020] text-white font-serif font-extrabold px-5 py-2.5 rounded-md text-xs tracking-wide transition shadow"
         >
           <Download className="w-4 h-4" />
-          Download TAE1_Bias_Audit.ipynb
+          Download BhashaBias_Audit_Notebook.ipynb
         </a>
       </div>
 

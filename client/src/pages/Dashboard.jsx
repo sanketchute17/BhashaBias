@@ -411,7 +411,7 @@ export default function Dashboard({ setActiveTab, darkMode }) {
           "Fairness is not a feature. It is a responsibility." &mdash; Responsible AI Lab
         </p>
         <span className={`font-mono text-xs not-italic font-extrabold ${textTitle}`}>
-          TAE-I v1.0.0
+          BhashaBias v1.0.0
         </span>
       </div>
     </div>

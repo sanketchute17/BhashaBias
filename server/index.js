@@ -739,5 +739,5 @@ app.get('/api/report/generate', async (req, res) => {
 // Start Server
 app.listen(PORT, async () => {
   await seedDatabase();
-  console.log(`TAE-I Hinglish Bias Audit server running on http://localhost:${PORT}`);
+  console.log(`BhashaBias Multilingual AI Audit server running on http://localhost:${PORT}`);
 });

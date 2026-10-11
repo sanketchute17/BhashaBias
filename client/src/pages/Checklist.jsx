@@ -8,7 +8,7 @@ export default function Checklist({ darkMode }) {
     { title: 'Language dimension evaluated', desc: 'Controlled multilingual audit comparing English, Hindi (Devanagari), and code-mixed Hinglish.', status: true },
     { title: 'Bias evidence collected', desc: 'Side-by-side evidence gallery displaying exact raw responses and evaluator justifications.', status: true },
     { title: 'Bias metrics calculated', desc: 'Flagged response rate, average bias score, stereotype rate, and percentage point deltas calculated.', status: true },
-    { title: 'Reproduction code provided', desc: 'Self-contained executable Jupyter notebook TAE1_Bias_Audit.ipynb with 15 complete sections.', status: true },
+    { title: 'Reproduction code provided', desc: 'Self-contained executable Jupyter notebook BhashaBias_Audit_Notebook.ipynb with 15 complete sections.', status: true },
     { title: 'Suggested mitigation provided', desc: 'Configurable prompt-level guardrails including Fairness-Aware System Instructions.', status: true },
     { title: 'Mitigation evaluated where real data is available', desc: 'Re-evaluation workflow executing mitigation strategy on identical scenario test cases.', status: true },
     { title: 'Before/After comparison', desc: 'Dedicated comparative impact page showing metric deltas and data-driven conclusions.', status: true },
@@ -26,23 +26,23 @@ export default function Checklist({ darkMode }) {
       {/* Title */}
       <div className="border-b-2 border-[#b8a68d] dark:border-[#524434] pb-3">
         <div className="text-xs font-mono font-extrabold uppercase tracking-widest text-[#b45309]">
-          FACULTY VERIFICATION
+          STANDARDS VERIFICATION
         </div>
         <h1 className="font-cinzel text-2xl font-black tracking-tight text-[#000000] dark:text-[#ffffff]">
-          TAE-I Assignment Requirement Checklist
+          Responsible AI Benchmark Checklist
         </h1>
         <p className={`text-xs font-bold italic mt-0.5 ${textMuted}`}>
-          Faculty submission checklist confirming compliance with all 12 TAE-I "Bias Bounty Hunt" assignment requirements.
+          Comprehensive audit framework checklist confirming compliance with 12/12 core multilingual fairness and reproducibility standards.
         </p>
       </div>
 
       <div className={`p-6 rounded-xl border-2 ornate-border space-y-4 shadow-sm ${cardBg}`}>
         <div className="flex items-center justify-between border-b-2 pb-3 border-[#b8a68d] dark:border-[#524434]">
           <h2 className="text-xs font-extrabold uppercase font-cinzel tracking-wider text-[#000000] dark:text-[#ffffff]">
-            Faculty Deliverables Grid (12 / 12 Complete)
+            Core Benchmark Deliverables Grid (12 / 12 Complete)
           </h2>
           <span className="text-xs font-mono font-extrabold text-emerald-700 dark:text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded border-2 border-emerald-500/40">
-            100% SUBMISSION READY
+            100% BENCHMARK VERIFIED
           </span>
         </div>
 
