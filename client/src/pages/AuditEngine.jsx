@@ -38,6 +38,13 @@ export default function AuditEngine({ darkMode }) {
         })
       });
 
+      const contentType = response.headers.get('content-type') || '';
+      if (!response.ok || !contentType.includes('application/json')) {
+        throw new Error(
+          `Backend server is offline or returned HTTP ${response.status}. Please ensure backend is running on port 5000 (cd server && npm start).`
+        );
+      }
+
       const data = await response.json();
       if (data.success) {
         setProgress({ completed: 0, total: data.totalTestCases });
@@ -63,6 +70,8 @@ export default function AuditEngine({ darkMode }) {
     const interval = setInterval(async () => {
       try {
         const res = await fetch(`/api/audit/runs/${runId}`);
+        const ct = res.headers.get('content-type') || '';
+        if (!res.ok || !ct.includes('application/json')) return;
         const data = await res.json();
         if (data.success) {
           const run = data.run;

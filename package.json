@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "BhashaBias: Multilingual & Hinglish AI Bias Audit Platform",
   "scripts": {
+    "dev": "concurrently -n \"SERVER,CLIENT\" -c \"blue,magenta\" \"npm run server\" \"npm run client\"",
     "server": "npm --prefix server start",
     "client": "npm --prefix client run dev",
     "build": "npm --prefix client run build"
@@ -16,5 +17,8 @@
     "express"
   ],
   "author": "Sanket Manoj Chute",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
 }

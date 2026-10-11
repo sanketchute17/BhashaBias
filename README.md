@@ -263,16 +263,22 @@ GEMINI_API_KEY=your_gemini_api_key_here
 
 ### 4. Launch Application
 
-Open two terminal windows:
-
+**Option A (Single Command - Recommended):**
 ```bash
-# Terminal 1: Start Backend API (Port 5000)
-cd server
-npm start
-
-# Terminal 2: Start Frontend Application (Port 3000)
-cd client
 npm run dev
+```
+> Starts both the Backend API (Port 5000) and Frontend Application (Port 3000) simultaneously with unified color-coded logging.
+
+**Option B (Windows One-Click Launcher):**
+Double-click **`start.bat`** in the root directory.
+
+**Option C (Separate Terminals):**
+```bash
+# Terminal 1: Backend API (Port 5000)
+npm run server
+
+# Terminal 2: Frontend App (Port 3000)
+npm run client
 ```
 
 Open **`http://localhost:3000`** in your browser to explore BhashaBias!
